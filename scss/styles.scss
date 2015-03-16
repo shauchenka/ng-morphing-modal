@@ -1,0 +1,339 @@
+// breakpoints
+
+$S:     480px;
+$M:     768px;
+$L:     1170px;
+
+// media queries
+@mixin box-sizing( $type: border-box ) {
+  -webkit-box-sizing: $type;
+  -moz-box-sizing: $type;
+  -o-box-sizing: $type;
+  -ms-box-sizing: $type;
+  box-sizing: $type;
+}
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+@mixin transition-property($property...) {
+  -moz-transition-property:    $property;
+  -o-transition-property:      $property;
+  -webkit-transition-property: $property;
+  transition-property:         $property;
+}
+@mixin transition-duration($duration...) {
+  -moz-transition-property:    $duration;
+  -o-transition-property:      $duration;
+  -webkit-transition-property: $duration;
+  transition-property:         $duration;
+}
+@mixin transition-timing-function($timing...) {
+  -moz-transition-timing-function:    $timing;
+  -o-transition-timing-function:      $timing;
+  -webkit-transition-timing-function: $timing;
+  transition-timing-function:         $timing;
+}
+@mixin transition-delay($delay...) {
+  -moz-transition-delay:    $delay;
+  -o-transition-delay:      $delay;
+  -webkit-transition-delay: $delay;
+  transition-delay:         $delay;
+}
+@mixin background ($folder:style1, $img:file, $type:png, $repeat:no-repeat, $x:0, $y:0) {
+  background-image: url(./images/#{$folder}/#{$img}.#{$type});
+  background-repeat: #{$repeat};
+  background-position: #{$x}px #{$y}px;
+}
+
+// generic transform
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+  -o-transform: $transforms;
+  -ms-transform: $transforms;
+  -webkit-transform: $transforms;
+  transform: $transforms;
+}
+// rotate
+@mixin rotate ($deg) {
+  @include transform(rotate(#{$deg}deg));
+}
+
+// scale
+@mixin scale($scale) {
+  @include transform(scale($scale));
+}
+// translate
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+// skew
+@mixin skew ($x, $y) {
+  @include transform(skew(#{$x}deg, #{$y}deg));
+}
+//transform origin
+@mixin transform-origin ($origin) {
+  moz-transform-origin: $origin;
+  -o-transform-origin: $origin;
+  -ms-transform-origin: $origin;
+  -webkit-transform-origin: $origin;
+  transform-origin: $origin;
+}
+
+
+@mixin MQ($canvas) {
+  @if $canvas == S {
+    @media only screen and (min-width: $S) { @content; }
+  }
+  @else if $canvas == M {
+    @media only screen and (min-width: $M) { @content; }
+  }
+  @else if $canvas == L {
+    @media only screen and (min-width: $L) { @content; }
+  }
+}
+
+// antialiasing mode font rendering
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// colors
+
+$color-1: #34383c; // Outer Space
+$color-2: #03bb91; // Caribbean Green
+$color-3: #ffffff; // White
+
+// fonts
+
+$primary-font: 'Source Sans Pro', sans-serif;
+
+/* --------------------------------
+
+Primary style
+
+-------------------------------- */
+
+*, *::after, *::before {
+  @include box-sizing(border-box);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font: {
+    size: 1.6rem;
+    family: $primary-font;
+  }
+  color: $color-1;
+  background-color: $color-3;
+
+  &.overflow-hidden {
+    /* used when modal is visible */
+    overflow: hidden;
+  }
+}
+
+a {
+  color: $color-2;
+  text-decoration: none;
+}
+
+/* --------------------------------
+
+Main Components
+
+-------------------------------- */
+
+.cd-section {
+  padding: 2em 5%;
+  text-align: center;
+  background-color: $color-2;
+
+  p {
+    margin: 2em 0;
+    line-height: 1.6;
+    color: $color-3;
+    @include font-smoothing;
+  }
+
+  @include MQ(M) {
+    padding: 4em 10%;
+
+    p {
+      font-size: 1.8rem;
+      line-height: 2;
+    }
+  }
+
+  @include MQ(L) {
+    padding: 4em 20%;
+  }
+}
+
+.cd-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+
+  @include transition(visibility 0s .3s, opacity .3s 0s, z-index 0s .3s);
+
+  &::after {
+    /* gradient overlay at bottom of modal window */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    pointer-events: none;
+    background: transparent;
+    @include background(linear-gradient(to top,rgba($color-1, 1), rgba($color-1, 0)));
+  }
+
+  .cd-modal-content {
+    height: 100%;
+    width: 100%;
+    padding: 3em 5%;
+    text-align: left;
+    overflow-y: auto;
+    @include font-smoothing;
+  }
+
+  p {
+    color: $color-3;
+    line-height: 1.6;
+    margin: 2em 0;
+  }
+
+  .modal-is-visible & {
+    z-index: 1;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+
+    @include transition(visibility 0s 0s, opacity .3s 0s, z-index 0s 0s);
+
+    .cd-modal-content {
+      -webkit-overflow-scrolling: touch;
+    }
+  }
+
+  @include MQ(M) {
+
+    .cd-modal-content {
+      padding: 4em 10%;
+    }
+  }
+
+  @include MQ(L) {
+
+    .cd-modal-content {
+      padding: 6em 20%;
+    }
+
+    p {
+      font-size: 2rem;
+      line-height: 2;
+    }
+  }
+}
+
+.cd-modal-action {
+  position: relative;
+
+  .btn, .cd-modal-bg {
+    display: inline-block;
+    height: 4em;
+    background-color: $color-1;
+  }
+
+  .btn {
+    width: 12.5em;
+    border-radius: 5em;
+
+    color: $color-3;
+    line-height: 4em;
+    white-space: nowrap;
+    font-weight: 700;
+    @include font-smoothing;
+
+    @include transition(color .2s .3s, width .3s 0s);
+
+    &.to-circle {
+      width: 4em;
+      color: transparent;
+      @include transition(color .2s 0s, width .3s .2s);
+    }
+  }
+
+  .cd-modal-bg {
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    top: 0;
+    width: 4em;
+    border-radius: 50%;
+    opacity: 0;
+    visibility: hidden;
+    @include transform(translateZ(0));
+    @include transform(translateX(-2em));
+    @include transition(visibility 0s .5s);
+
+    &.is-visible {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+.cd-modal-close {
+  position: fixed;
+  z-index: 1;
+  top: 20px;
+  right: 5%;
+
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+
+  background: rgba(#000, .3) url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/cd-icon-close_copy.svg) no-repeat center center;
+
+  /* image replacement */
+  overflow: hidden;
+  text-indent: 100%;
+  white-space: nowrap;
+
+  visibility: hidden;
+  opacity: 0;
+  @include transform(translateZ(0));
+  @include transform(scale(0));
+  @include transition(transform .3s 0s, visibility 0s .3s, opacity .3s 0s);
+
+  .no-touch &:hover {
+    background-color: rgba(#000, .5);
+  }
+
+  .modal-is-visible & {
+    visibility: visible;
+    opacity: 1;
+    @include transition(transform .3s 0s, visibility 0s 0s, opacity .3s 0s);
+    @include transform(scale(1));
+  }
+
+  @include MQ(M) {
+    top: 70px;
+  }
+}
