@@ -1,20 +1,52 @@
 # Angular Morphing Modal
 Angular directive for fullscreen modal window with wonderful animation in trending Material Design style. Responsive and mobile-ready. Works in modern browsers.
 
-### How it works
+## How it works
 ![Angular Morphing Modal](http://habrastorage.org/files/e54/59d/5c9/e5459d5c9aeb445c8ed7c3f1fde489df.gif)
 
-### How to install
-**Manual:**
-Download contents of build/ folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+## Installation
 
-**Via bower:**
+#### Install with Bower
 ```shell
 npm update -g bower
-bower install ng-morphing-modal
+bower install ng-morphing-modal --save
 ```
 
-### To do:
+#### Include Scripts
+```html
+<script src="bower_components/ng-morphing-modal/build/js/MorphingModal.js"></script>
+<script src="bower_components/ng-morphing-modal/build/js/ngMorphingModal.js"></script>
+<script src="bower_components/velocity/velocity.min.js"></script>
+```
+
+#### Declare Angular Dependency
+```html
+angular.module('your-app', ['ng-morphing-modal']);
+```
+
+#### Manual installation
+Download contents of build/ folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+
+## Usage
+Define launcher:
+```html
+<a href="#" class="btn" **ng-morphing-modal** content-selector="**cbc**" data-type="modal-trigger">
+Fire Modal
+</a>
+```
+And modal content markup:
+```html
+<div class="cd-modal" id="**cbc**">
+    <div class="cd-modal-content">
+    <!-- your modal content -->
+    </div>
+</div>
+```
+
+
+### Change list:
+* ~~Bower package~~
+* ~~Initial release~~
 * Support for multiple DOM instances
 * Add build script
 * Refactoring sass for easy styling
@@ -22,11 +54,6 @@ bower install ng-morphing-modal
 * Extended mobile support
 
 Please show your interest to this project with a stars, it can speed up development process!
-
-
-### Change list:
-* ~~Bower package~~
-* ~~Initial release~~
 
 ### Support and credits
 Based on idea from [this Pen](http://codepen.io/codyhouse/pen/vEVjJg)
