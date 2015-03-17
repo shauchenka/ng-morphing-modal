@@ -4,6 +4,24 @@ $S:     480px;
 $M:     768px;
 $L:     1170px;
 
+// antialiasing mode font rendering
+
+@mixin font-smoothing {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// colors
+
+$color-1: #34383c; // Outer Space
+$color-2: #457eff; // Caribbean Green
+$color-3: #ffffff; // White
+
+// fonts
+
+$primary-font: 'Source Sans Pro', sans-serif;
+
+
 // media queries
 @mixin box-sizing( $type: border-box ) {
   -webkit-box-sizing: $type;
@@ -95,22 +113,6 @@ $L:     1170px;
   }
 }
 
-// antialiasing mode font rendering
-
-@mixin font-smoothing {
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-// colors
-
-$color-1: #34383c; // Outer Space
-$color-2: #03bb91; // Caribbean Green
-$color-3: #ffffff; // White
-
-// fonts
-
-$primary-font: 'Source Sans Pro', sans-serif;
 
 /* --------------------------------
 

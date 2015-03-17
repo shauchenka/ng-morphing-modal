@@ -76,6 +76,8 @@
         retrieveScale: function (btn) {
 
             var that = this;
+if(btn.offset()){
+
 
             var btnRadius = btn.width() / 2,
                 left = btn.offset().left + btnRadius,
@@ -87,8 +89,11 @@
                 left: left - btnRadius,
                 translateX: 0
             }, 0);
-
+}else{
+    scale=1;
+}
             return scale;
+
         },
         scaleValue: function (topValue, leftValue, radiusValue, windowW, windowH) {
 
