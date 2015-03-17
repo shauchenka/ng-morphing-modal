@@ -1,4 +1,4 @@
-### Angular Morphing Modal
+# Angular Morphing Modal
 Angular directive for fullscreen modal window with wonderful animation!
 
 ### How it works
