@@ -7,10 +7,14 @@
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/148866/velocity.min.js" language="JavaScript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
     <script src="../js/MorphingModal.js" language="JavaScript"></script>
+    <script src="../js/ngMorphingModal.js" language="JavaScript"></script>
 </head>
 <body>
 <section class="cd-section">
+    <div class='alert' ng-morphing-modal='alert-info'>Click Me to Toggle the class</div>
+
     <p>
+
         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Non ipsum repudiandae sequi ut optio reiciendis consectetur, cum, a provident, iusto quod esse, perferendis iure iste! Quidem itaque, exercitationem aliquam, mollitia recusandae repellat dolores quibusdam minima quae reprehenderit ut, reiciendis officia.
     </p>
 
@@ -18,12 +22,10 @@
         <a href="#0" class="btn" data-type="modal-trigger">Fire Modal Window</a>
         <span class="cd-modal-bg"></span>
     </div> <!-- cd-modal-action -->
-    <div data-ng-controller="MyController">
-        <input type="text" data-ng-model="name" />
-        <p>Hello {{name}}</p>
-    </div>
+
     <div class="cd-modal">
         <div class="cd-modal-content">
+
             <p>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad modi repellendus, optio eveniet eligendi molestiae? Fugiat, temporibus! A rerum pariatur neque laborum earum, illum voluptatibus eum voluptatem fugiat, porro animi tempora? Sit harum nulla, nesciunt molestias, iusto aliquam aperiam est qui possimus reprehenderit ipsam ea aut assumenda inventore iste! Animi quaerat facere repudiandae earum quisquam accusamus tempora, delectus nesciunt, provident quae aliquam, voluptatum beatae quis similique in maiores repellat eligendi voluptas veniam optio illum vero! Eius, dignissimos esse eligendi veniam.
             </p>
@@ -42,11 +44,7 @@
 </section> <!-- .cd-section -->
 <script>
 
-    var myApp = angular.module("myApp", []);
 
-    myApp.controller("MyController", ["$scope", function($scope) {
-        $scope.name = "World";
-    }]);
 </script>
 </body>
 </html>

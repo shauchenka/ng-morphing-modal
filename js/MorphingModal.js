@@ -1,81 +1,140 @@
-jQuery(document).ready(function($){
-    //trigger the animation - open modal window
-    $('[data-type="modal-trigger"]').on('click', function(){
-        var actionBtn = $(this),
-            scaleValue = retrieveScale(actionBtn.next('.cd-modal-bg'));
+(function (window, document) {
 
-        actionBtn.addClass('to-circle');
-        actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-            animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-        });
+    MorphingModal = function (options) {
 
-        //if browser doesn't support transitions...
-        if(actionBtn.parents('.no-csstransitions').length > 0 ) animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
-    });
+        var that = this;
 
-    //trigger the animation - close modal window
-    $('.cd-section .cd-modal-close').on('click', function(){
-        closeModal();
-    });
-    $(document).keyup(function(event){
-        if(event.which=='27') closeModal();
-    });
+        that.selectorId = '[data-type="modal-trigger"]';//options.selector;
+        that.selectorObj = $('[data-type="modal-trigger"]');
 
-    $(window).on('resize', function(){
-        //on window resize - update cover layer dimention and position
-        if($('.cd-section.modal-is-visible').length > 0) window.requestAnimationFrame(updateLayer);
-    });
 
-    function retrieveScale(btn) {
-        var btnRadius = btn.width()/2,
-            left = btn.offset().left + btnRadius,
-            top = btn.offset().top + btnRadius - $(window).scrollTop(),
-            scale = scaleValue(top, left, btnRadius, $(window).height(), $(window).width());
+        // DEFAULT OPTIONS
+        that.options = {
+            selectorId: false,
+            selectorObj: false,
+            onAfterOpen: null,
+            onAfterClose: null
 
-        btn.css('position', 'fixed').velocity({
-            top: top - btnRadius,
-            left: left - btnRadius,
-            translateX: 0,
-        }, 0);
+        };
 
-        return scale;
+        // OVERWRITE DEFAULT OPTIONS
+        for (i in options) that.options[i] = options[i];
+
+        // INIT THE WHOLE DAMN THING!!!
+        that.init();
+
+    };
+    MorphingModal.prototype = {
+
+        obj: {},
+        containerObj: {},
+        init: function () {
+            var that = this;
+
+            that.corners = this.options.corners;
+
+
+            jQuery(document).ready(function ($) {
+                that.create();
+            });
+
+        },
+        create: function () {
+            var that = this;
+
+            //trigger the animation - open modal window
+            that.selectorObj.on('click', function () {
+                var actionBtn = $(this),
+                    scaleValue = that.retrieveScale(actionBtn.next('.cd-modal-bg')); //c
+
+                actionBtn.addClass('to-circle');
+                actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                    that.animateLayer(actionBtn.next('.cd-modal-bg'), that.scaleValue, true);
+                });
+
+                //if browser doesn't support transitions...
+                if (actionBtn.parents('.no-csstransitions').length > 0) that.animateLayer(actionBtn.next('.cd-modal-bg'), that.scaleValue, true);
+            });
+
+            //trigger the animation - close modal window
+            $('.cd-section .cd-modal-close').on('click', function () {
+                that.closeModal();
+            });
+            $(document).keyup(function (event) {
+                if (event.which == '27') that.closeModal();
+            });
+
+            $(window).on('resize', function () {
+                //on window resize - update cover layer dimention and position
+                if ($('.cd-section.modal-is-visible').length > 0) window.requestAnimationFrame(that.updateLayer);
+            });
+        },
+        retrieveScale: function (btn) {
+
+            var that = this;
+
+            var btnRadius = btn.width() / 2,
+                left = btn.offset().left + btnRadius,
+                top = btn.offset().top + btnRadius - $(window).scrollTop(),
+                scale = that.scaleValue(top, left, btnRadius, $(window).height(), $(window).width());
+
+            btn.css('position', 'fixed').velocity({
+                top: top - btnRadius,
+                left: left - btnRadius,
+                translateX: 0
+            }, 0);
+
+            return scale;
+        },
+        scaleValue: function (topValue, leftValue, radiusValue, windowW, windowH) {
+
+            var that = this;
+
+            var maxDistHor = ( leftValue > windowW / 2) ? leftValue : (windowW - leftValue),
+                maxDistVert = ( topValue > windowH / 2) ? topValue : (windowH - topValue);
+            return Math.ceil(Math.sqrt(Math.pow(maxDistHor, 2) + Math.pow(maxDistVert, 2)) / radiusValue);
+        },
+        animateLayer: function (layer, scaleVal, bool) {
+
+            var that = this;
+
+            layer.velocity({ scale: scaleVal }, 400, function () {
+                $('body').toggleClass('overflow-hidden', bool);
+                (bool)
+                    ? layer.parents('.cd-section').addClass('modal-is-visible').end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend')
+                    : layer.removeClass('is-visible').removeAttr('style').siblings(that.selectorId).removeClass('to-circle');
+            });
+        },
+        updateLayer: function () {
+
+            var that = this;
+
+            var layer = $('.cd-section.modal-is-visible').find('.cd-modal-bg'),
+                layerRadius = layer.width() / 2,
+                layerTop = layer.siblings('.btn').offset().top + layerRadius - $(window).scrollTop(),
+                layerLeft = layer.siblings('.btn').offset().left + layerRadius,
+                scale = that.scaleValue(layerTop, layerLeft, layerRadius, $(window).height(), $(window).width());
+
+            layer.velocity({
+                top: layerTop - layerRadius,
+                left: layerLeft - layerRadius,
+                scale: scale
+            }, 0);
+        },
+        closeModal: function () {
+
+            var that = this;
+
+            var section = $('.cd-section.modal-is-visible');
+            section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
+                that.animateLayer(section.find('.cd-modal-bg'), 1, false);
+            });
+            //if browser doesn't support transitions...
+            if (section.parents('.no-csstransitions').length > 0) animateLayer(section.find('.cd-modal-bg'), 1, false);
+        },
+
+        destroy: function () {
+
+        }
     }
-
-    function scaleValue( topValue, leftValue, radiusValue, windowW, windowH) {
-        var maxDistHor = ( leftValue > windowW/2) ? leftValue : (windowW - leftValue),
-            maxDistVert = ( topValue > windowH/2) ? topValue : (windowH - topValue);
-        return Math.ceil(Math.sqrt( Math.pow(maxDistHor, 2) + Math.pow(maxDistVert, 2) )/radiusValue);
-    }
-
-    function animateLayer(layer, scaleVal, bool) {
-        layer.velocity({ scale: scaleVal }, 400, function(){
-            $('body').toggleClass('overflow-hidden', bool);
-            (bool)
-                ? layer.parents('.cd-section').addClass('modal-is-visible').end().off('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend')
-                : layer.removeClass('is-visible').removeAttr( 'style' ).siblings('[data-type="modal-trigger"]').removeClass('to-circle');
-        });
-    }
-
-    function updateLayer() {
-        var layer = $('.cd-section.modal-is-visible').find('.cd-modal-bg'),
-            layerRadius = layer.width()/2,
-            layerTop = layer.siblings('.btn').offset().top + layerRadius - $(window).scrollTop(),
-            layerLeft = layer.siblings('.btn').offset().left + layerRadius,
-            scale = scaleValue(layerTop, layerLeft, layerRadius, $(window).height(), $(window).width());
-
-        layer.velocity({
-            top: layerTop - layerRadius,
-            left: layerLeft - layerRadius,
-            scale: scale,
-        }, 0);
-    }
-
-    function closeModal() {
-        var section = $('.cd-section.modal-is-visible');
-        section.removeClass('modal-is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function(){
-            animateLayer(section.find('.cd-modal-bg'), 1, false);
-        });
-        //if browser doesn't support transitions...
-        if(section.parents('.no-csstransitions').length > 0 ) animateLayer(section.find('.cd-modal-bg'), 1, false);
-    }
-});
+})(window, document);
