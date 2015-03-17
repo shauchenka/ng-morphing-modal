@@ -1,5 +1,5 @@
 # Angular Morphing Modal
-Angular directive for fullscreen modal window with wonderful animation in trending Material Design style!
+Angular directive for fullscreen modal window with wonderful animation in trending Material Design style. Responsive and mobile-ready.
 
 ### How it works
 ![Angular Morphing Modal](http://habrastorage.org/files/e54/59d/5c9/e5459d5c9aeb445c8ed7c3f1fde489df.gif)
@@ -14,6 +14,7 @@ Download contents of /js folder from this repo, include .js files in your projec
 * Add build script
 * Refactoring sass for easy styling
 * Content from JSON/XHR
+* Extended mobile support
 
 Please show your interest to this project with a stars, it can speed up development process!
 
