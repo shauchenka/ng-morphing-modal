@@ -6,12 +6,16 @@
 
         that.selectorId = '[data-type="modal-trigger"]';//options.selector;
         that.selectorObj = $('[data-type="modal-trigger"]');
+        that.contentSelector = '.cd-modal';
+        that.contentSelectorObj = $('.cd-modal');
+
 
 
         // DEFAULT OPTIONS
         that.options = {
             selectorId: false,
             selectorObj: false,
+            contentSelector: false,
             onAfterOpen: null,
             onAfterClose: null
 
@@ -19,7 +23,7 @@
 
         // OVERWRITE DEFAULT OPTIONS
         for (i in options) that.options[i] = options[i];
-
+        console.log(that.contentSelector);
         // INIT THE WHOLE DAMN THING!!!
         that.init();
 
