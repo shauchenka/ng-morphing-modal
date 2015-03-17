@@ -11,6 +11,7 @@ Download contents of /js folder from this repo, include .js files in your projec
 
 * Bower package
 * Support for multiple instances
+* Add build script
 * Refactoring sass for easy styling
 * Content from JSON/XHR
 
