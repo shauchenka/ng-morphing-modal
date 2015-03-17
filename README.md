@@ -7,7 +7,11 @@ Angular directive for fullscreen modal window with wonderful animation!
 ### How to install
 Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
 
+### To do:
+Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+
 ### Support and credits
+Based on idea from [this Pen](http://codepen.io/codyhouse/pen/vEVjJg)
 Created and maintained for you by [TrackDuck](https://trackduck.com) - visual feedback and bug tracking with screenshots for web integrated with more than 15 project management systems.
 
 [![TrackDuck](http://trackduck.github.io/attention-map/images/td.png)](https://trackduck.com)
