@@ -5,12 +5,17 @@ Angular directive for fullscreen modal window with wonderful animation in trendi
 ![Angular Morphing Modal](http://habrastorage.org/files/e54/59d/5c9/e5459d5c9aeb445c8ed7c3f1fde489df.gif)
 
 ### How to install
-Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+**Manual:**
+Download contents of build/ folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+
+**Via bower:**
+```shell
+npm update -g bower
+bower install ng-morphing-modal
+```
 
 ### To do:
-
-* Bower package
-* Support for multiple instances
+* Support for multiple DOM instances
 * Add build script
 * Refactoring sass for easy styling
 * Content from JSON/XHR
@@ -20,7 +25,8 @@ Please show your interest to this project with a stars, it can speed up developm
 
 
 ### Change list:
-* Initial release
+* ~~Bower package~~
+* ~~Initial release~~
 
 ### Support and credits
 Based on idea from [this Pen](http://codepen.io/codyhouse/pen/vEVjJg)
