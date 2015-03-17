@@ -8,7 +8,17 @@ Angular directive for fullscreen modal window with wonderful animation!
 Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
 
 ### To do:
-Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
+
+* Bower package
+* Support for multiple instances
+* Refactoring sass for easy styling
+* Content from JSON/XHR
+
+Please show your interest to this project with a stars, it can speed up development process!
+
+
+### Change list:
+* Initial release
 
 ### Support and credits
 Based on idea from [this Pen](http://codepen.io/codyhouse/pen/vEVjJg)
