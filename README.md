@@ -2,7 +2,7 @@
 Angular directive for fullscreen modal window with wonderful animation!
 
 ### How it works
-![Angular Morphing Modal](https://www.dropbox.com/s/mgcc6fq2w0x4e6m/mm.gif)
+![Angular Morphing Modal](http://habrastorage.org/files/e54/59d/5c9/e5459d5c9aeb445c8ed7c3f1fde489df.gif)
 
 ### How to install
 Download contents of /js folder from this repo, include .js files in your project. Velocity.js and Angular is required!
