@@ -1,5 +1,5 @@
 # Angular Morphing Modal
-Angular directive for fullscreen modal window with wonderful animation!
+Angular directive for fullscreen modal window with wonderful animation in trending Material Design style!
 
 ### How it works
 ![Angular Morphing Modal](http://habrastorage.org/files/e54/59d/5c9/e5459d5c9aeb445c8ed7c3f1fde489df.gif)
