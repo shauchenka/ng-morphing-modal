@@ -2,8 +2,6 @@ var myApp = angular.module('myApp', []).directive(
     'ngMorphingModal', function() {
         return function(scope, elem, attrs) {
 
-            var classToAppend = attrs['clickToggleClass'];
-            var classAppended = false;
 
             var MorphingModalObj = new MorphingModal({
                 selectorId: '[data-type="modal-trigger"]',

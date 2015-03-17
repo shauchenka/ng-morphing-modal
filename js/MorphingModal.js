@@ -49,11 +49,11 @@
 
                 actionBtn.addClass('to-circle');
                 actionBtn.next('.cd-modal-bg').addClass('is-visible').one('webkitTransitionEnd otransitionend oTransitionEnd msTransitionEnd transitionend', function () {
-                    that.animateLayer(actionBtn.next('.cd-modal-bg'), that.scaleValue, true);
+                    that.animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
                 });
 
                 //if browser doesn't support transitions...
-                if (actionBtn.parents('.no-csstransitions').length > 0) that.animateLayer(actionBtn.next('.cd-modal-bg'), that.scaleValue, true);
+                if (actionBtn.parents('.no-csstransitions').length > 0) that.animateLayer(actionBtn.next('.cd-modal-bg'), scaleValue, true);
             });
 
             //trigger the animation - close modal window
