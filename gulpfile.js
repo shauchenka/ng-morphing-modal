@@ -64,7 +64,7 @@ gulp.task('bs-reload', function () {
 
 // Task for `gulp` command
 
-gulp.task('ci',['sass', 'jscu', 'jsc', 'template', 'template'], function() { });
+gulp.task('ci',['jscu', 'jsc', 'template', 'template'], function() { });
 
 gulp.task('default',['browser-sync'], function() {
     gulp.watch('sass/**/*.scss',['sass']);
