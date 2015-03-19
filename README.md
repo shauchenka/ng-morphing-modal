@@ -1,8 +1,6 @@
 # Angular Morphing Modal
 Angular directive for fullscreen modal window with wonderful animation in trending Material Design style. Responsive and mobile-ready. Works in modern browsers.
 
-[![Build Status](https://travis-ci.org/shauchenka/ng-morphing-modal.svg?branch=master)](https://travis-ci.org/shauchenka/ng-morphing-modal)
-
 [Check Demo](https://dl.dropboxusercontent.com/u/60349134/ngm/example/index.html#)
 
 ## How it works
