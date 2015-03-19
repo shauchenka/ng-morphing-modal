@@ -1,5 +1,7 @@
 # Angular Morphing Modal
+[Buld status](https://travis-ci.org/shauchenka/ng-morphing-modal.svg)
 Angular directive for fullscreen modal window with wonderful animation in trending Material Design style. Responsive and mobile-ready. Works in modern browsers.
+
 [Check Demo](https://dl.dropboxusercontent.com/u/60349134/ngm/example/index.html#)
 
 ## How it works
@@ -15,9 +17,8 @@ bower install ng-morphing-modal --save
 
 #### Include Scripts
 ```html
-<script src="bower_components/ng-morphing-modal/build/js/MorphingModal.js"></script>
-<script src="bower_components/ng-morphing-modal/build/js/ngMorphingModal.js"></script>
 <script src="bower_components/velocity/velocity.min.js"></script>
+<script src="bower_components/ng-morphing-modal/build/js/ngMorphingModal.min.js"></script>
 ```
 
 #### Declare Angular Dependency

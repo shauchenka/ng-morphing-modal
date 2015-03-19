@@ -4,16 +4,12 @@ var myApp = angular.module('myApp', []).directive(
         var uniqid = randLetter + Date.now();
 
         return {
-
             replace: true,
             restrict: 'AE',
             scope: {
                 contentSelector: '@'
             },
             link: function (scope, element, attributes) {
-
-
-
 
             var MorphingModalObj = new MorphingModal({
                 selectorId: '[data-type="modal-trigger"]',
