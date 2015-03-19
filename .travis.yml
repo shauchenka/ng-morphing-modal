@@ -2,8 +2,8 @@ env:
   SKIP_SASS_BINARY_DOWNLOAD_FOR_CI=true
 language: node_js
 node_js:
-  - "0.10"
   - "0.11"
+  - "0.12"
 before_script:
   - npm install -g gulp
 script: gulp ci
